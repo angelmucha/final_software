@@ -32,9 +32,13 @@ class Cuenta:
         return operacion
     
     def depositar(self, valor):
-        self.saldo += valor
-        operacion = Operacion(numero_destino=self.numero, valor=valor)
-        self.operaciones.append(operacion)
+        if valor < 0:
+            raise ValueError("El valor a depositar debe ser positivo.")
+        else:   
+            self.saldo += valor
+            operacion = Operacion(numero_destino=self.numero, valor=valor)
+            self.operaciones.append(operacion)
+        
 
 class Operacion:
     def __init__(self, numero_destino, valor):
